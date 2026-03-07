@@ -1,4 +1,5 @@
 const Session = require('../models/Session');
+const runwayClient = require('../config/runway');
 
 // @desc    Evaluate child's speech response
 // @route   POST /api/v1/phase3/evaluate-response
@@ -27,6 +28,17 @@ const evaluateSpeech = async (req, res) => {
 // @desc    Simplified AI Chat for Social Initiative
 // @route   POST /api/v1/phase3/ai-chat
 // @access  Private
+const aiChat = async (req, res) => {
+    const { childId, message } = req.body;
+
+    // Simple response for now - in production this would call an LLM
+    res.json({
+        success: true,
+        message: `Hello! I heard you say: "${message}". You're doing a great job!`,
+        childId
+    });
+};
+
 // @desc    Transform speech using RunwayML Speech-to-Speech
 // @route   POST /api/v1/phase3/speech-to-speech
 // @access  Private
