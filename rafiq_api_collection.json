@@ -764,7 +764,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://rafiq-backend.up.railway.app",
+			"value": "https://rafiq-backend-production.up.railway.app",
 			"type": "string"
 		},
 		{
