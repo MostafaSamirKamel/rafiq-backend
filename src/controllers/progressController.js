@@ -2,7 +2,7 @@ const Session = require('../models/Session');
 const Child = require('../models/Child');
 
 // @desc    Get child progress overview
-// @route   GET /api/v1/progress/:childId/overview
+// @route   GET /progress/:childId/overview
 // @access  Private
 const getProgressOverview = async (req, res) => {
     const { childId } = req.params;
@@ -51,7 +51,7 @@ const getProgressOverview = async (req, res) => {
 };
 
 // @desc    Export progress report (Placeholder for PDF)
-// @route   GET /api/v1/progress/:childId/export
+// @route   GET /progress/:childId/export
 // @access  Private
 const exportReport = async (req, res) => {
     // In a real implementation, this would use a library like 'pdfkit' or 'puppeteer'

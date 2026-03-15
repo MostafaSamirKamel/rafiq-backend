@@ -3,7 +3,7 @@ const Child = require('../models/Child');
 const runwayClient = require('../config/runway');
 
 // @desc    Request to generate a signal/emotion video
-// @route   POST /api/v1/phase2/generate-video
+// @route   POST /phase2/generate-video
 // @access  Private
 const generateVideo = async (req, res) => {
     const { childId, type, target } = req.body;
@@ -59,7 +59,7 @@ const generateVideo = async (req, res) => {
 };
 
 // @desc    Get video job status
-// @route   GET /api/v1/phase2/video-status/:jobId
+// @route   GET /phase2/video-status/:jobId
 // @access  Private
 const getVideoStatus = async (req, res) => {
     const job = await VideoJob.findById(req.params.jobId);

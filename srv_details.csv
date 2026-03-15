@@ -1,0 +1,4 @@
+"QueryType","Target","NameTarget","Priority","Weight","Port","Name","Type","CharacterSet","Section","DataLength","TTL"
+"SRV","ac-vdg83nz-shard-00-01.zx1vhb4.mongodb.net","ac-vdg83nz-shard-00-01.zx1vhb4.mongodb.net","0","0","27017","_mongodb._tcp.cluster0.zx1vhb4.mongodb.net","SRV","Unicode","Answer","16","60"
+"SRV","ac-vdg83nz-shard-00-02.zx1vhb4.mongodb.net","ac-vdg83nz-shard-00-02.zx1vhb4.mongodb.net","0","0","27017","_mongodb._tcp.cluster0.zx1vhb4.mongodb.net","SRV","Unicode","Answer","16","60"
+"SRV","ac-vdg83nz-shard-00-00.zx1vhb4.mongodb.net","ac-vdg83nz-shard-00-00.zx1vhb4.mongodb.net","0","0","27017","_mongodb._tcp.cluster0.zx1vhb4.mongodb.net","SRV","Unicode","Answer","16","60"

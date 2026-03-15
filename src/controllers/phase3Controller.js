@@ -2,7 +2,7 @@ const Session = require('../models/Session');
 const runwayClient = require('../config/runway');
 
 // @desc    Evaluate child's speech response
-// @route   POST /api/v1/phase3/evaluate-response
+// @route   POST /phase3/evaluate-response
 // @access  Private
 const evaluateSpeech = async (req, res) => {
     const { childId, sessionId, transcribedText, expectedText } = req.body;
@@ -26,7 +26,7 @@ const evaluateSpeech = async (req, res) => {
 };
 
 // @desc    Simplified AI Chat for Social Initiative
-// @route   POST /api/v1/phase3/ai-chat
+// @route   POST /phase3/ai-chat
 // @access  Private
 const aiChat = async (req, res) => {
     const { childId, message } = req.body;
@@ -40,7 +40,7 @@ const aiChat = async (req, res) => {
 };
 
 // @desc    Transform speech using RunwayML Speech-to-Speech
-// @route   POST /api/v1/phase3/speech-to-speech
+// @route   POST /phase3/speech-to-speech
 // @access  Private
 const speechToSpeech = async (req, res) => {
     const { promptText, presetId, audioUrl } = req.body;

@@ -3,7 +3,7 @@ const SpecialistNote = require('../models/SpecialistNote');
 const Session = require('../models/Session');
 
 // @desc    Get all children assigned to a specialist
-// @route   GET /api/v1/specialists/my-children
+// @route   GET /specialists/my-children
 // @access  Private (Specialist)
 const getMyChildrenSpecialist = async (req, res) => {
     const children = await Child.find({ specialistId: req.user._id });
@@ -11,7 +11,7 @@ const getMyChildrenSpecialist = async (req, res) => {
 };
 
 // @desc    Update session settings for a child
-// @route   PUT /api/v1/specialists/session-settings/:childId
+// @route   PUT /specialists/session-settings/:childId
 // @access  Private (Specialist)
 const updateSessionSettings = async (req, res) => {
     const { phase1Enabled, phase2Enabled, phase3Enabled, duration, sessionsPerDay } = req.body;
@@ -41,7 +41,7 @@ const updateSessionSettings = async (req, res) => {
 };
 
 // @desc    Add a note for a child
-// @route   POST /api/v1/specialists/notes
+// @route   POST /specialists/notes
 // @access  Private (Specialist)
 const addNote = async (req, res) => {
     const { childId, note, visibleToParent } = req.body;
@@ -57,7 +57,7 @@ const addNote = async (req, res) => {
 };
 
 // @desc    Get notes for a child
-// @route   GET /api/v1/specialists/notes/:childId
+// @route   GET /specialists/notes/:childId
 // @access  Private (Parent/Specialist)
 const getNotes = async (req, res) => {
     const filter = { childId: req.params.childId };

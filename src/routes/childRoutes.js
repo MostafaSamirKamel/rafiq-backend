@@ -1,5 +1,5 @@
 const express = require('express');
-const { createChild, getMyChildren, getChildById } = require('../controllers/childController');
+const { createChild, getMyChildren, getChildById, updateChild } = require('../controllers/childController');
 const { protect } = require('../middlewares/authMiddleware');
 const upload = require('../middlewares/uploadMiddleware');
 const router = express.Router();
@@ -9,6 +9,7 @@ router.route('/')
     .get(protect, getMyChildren);
 
 router.route('/:id')
-    .get(protect, getChildById);
+    .get(protect, getChildById)
+    .put(protect, upload.single('photo'), updateChild);
 
 module.exports = router;

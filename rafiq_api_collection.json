@@ -24,7 +24,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/auth/register",
+							"raw": "{{baseUrl}}/auth/register",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -67,7 +67,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/auth/login",
+							"raw": "{{baseUrl}}/auth/login",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -123,7 +123,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/children",
+							"raw": "{{baseUrl}}/children",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -148,7 +148,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/children",
+							"raw": "{{baseUrl}}/children",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -173,7 +173,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/children/:id",
+							"raw": "{{baseUrl}}/children/:id",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -240,7 +240,7 @@
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase1/items",
+							"raw": "{{baseUrl}}/phase1/items",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -266,7 +266,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase1/items/:childId?type=person",
+							"raw": "{{baseUrl}}/phase1/items/:childId?type=person",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -314,7 +314,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase1/start-session",
+							"raw": "{{baseUrl}}/phase1/start-session",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -349,7 +349,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase1/quiz",
+							"raw": "{{baseUrl}}/phase1/quiz",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -389,7 +389,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase2/generate-video",
+							"raw": "{{baseUrl}}/phase2/generate-video",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -415,7 +415,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase2/video-status/:jobId",
+							"raw": "{{baseUrl}}/phase2/video-status/:jobId",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -462,7 +462,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase3/evaluate-response",
+							"raw": "{{baseUrl}}/phase3/evaluate-response",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -497,7 +497,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase3/ai-chat",
+							"raw": "{{baseUrl}}/phase3/ai-chat",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -532,7 +532,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/phase3/speech-to-speech",
+							"raw": "{{baseUrl}}/phase3/speech-to-speech",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -563,7 +563,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/progress/:childId/overview",
+							"raw": "{{baseUrl}}/progress/:childId/overview",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -596,7 +596,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/progress/:childId/export",
+							"raw": "{{baseUrl}}/progress/:childId/export",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -634,7 +634,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/specialists/my-children",
+							"raw": "{{baseUrl}}/specialists/my-children",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -669,7 +669,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/specialists/session-settings/:childId",
+							"raw": "{{baseUrl}}/specialists/session-settings/:childId",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -711,7 +711,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/specialists/notes",
+							"raw": "{{baseUrl}}/specialists/notes",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -737,7 +737,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/specialists/notes/:childId",
+							"raw": "{{baseUrl}}/specialists/notes/:childId",
 							"host": [
 								"{{baseUrl}}"
 							],

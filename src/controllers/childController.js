@@ -4,61 +4,65 @@ const cloudinary = require('../config/cloudinary');
 const fs = require('fs');
 
 // @desc    Create a new child profile
-// @route   POST /api/v1/children
+// @route   POST /children
 // @access  Private (Parent)
 const createChild = async (req, res) => {
-    const {
-        name,
-        birthdate,
-        gender,
-        governorate,
-        school,
-        iqScore,
-        healthStatus,
-        treatmentCenter,
-        specialistPhone,
-    } = req.body;
+    try {
+        const {
+            name,
+            birthdate,
+            gender,
+            governorate,
+            school,
+            iqScore,
+            healthStatus,
+            treatmentCenter,
+            specialistPhone,
+        } = req.body;
 
-    let photoUrl = '';
-    if (req.file) {
-        const result = await cloudinary.uploader.upload(req.file.path);
-        photoUrl = result.secure_url;
-        // Delete local file
-        fs.unlinkSync(req.file.path);
-    }
-
-    let specialistId = null;
-    if (specialistPhone) {
-        const specialist = await User.findOne({ phone: specialistPhone, role: 'specialist' });
-        if (specialist) {
-            specialistId = specialist._id;
+        let photoUrl = '';
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path);
+            photoUrl = result.secure_url;
+            // Delete local file
+            fs.unlinkSync(req.file.path);
         }
-    }
 
-    const child = await Child.create({
-        parentId: req.user._id,
-        specialistId,
-        name,
-        birthdate,
-        gender,
-        photoUrl,
-        governorate,
-        school,
-        iqScore,
-        healthStatus,
-        treatmentCenter,
-    });
+        let specialistId = null;
+        if (specialistPhone) {
+            const specialist = await User.findOne({ phone: specialistPhone, role: 'specialist' });
+            if (specialist) {
+                specialistId = specialist._id;
+            }
+        }
 
-    if (child) {
-        res.status(201).json(child);
-    } else {
-        res.status(400);
-        throw new Error('Invalid child data');
+        const child = await Child.create({
+            parentId: req.user._id,
+            specialistId,
+            name,
+            birthdate,
+            gender,
+            photoUrl,
+            governorate,
+            school,
+            iqScore,
+            healthStatus,
+            treatmentCenter,
+        });
+
+        if (child) {
+            res.status(201).json(child);
+        } else {
+            res.status(400);
+            throw new Error('Invalid child data');
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'حدث خطأ أثناء إنشاء ملف الطفل' });
     }
 };
 
 // @desc    Get all children for a parent
-// @route   GET /api/v1/children
+// @route   GET /children
 // @access  Private (Parent)
 const getMyChildren = async (req, res) => {
     const children = await Child.find({ parentId: req.user._id });
@@ -66,7 +70,7 @@ const getMyChildren = async (req, res) => {
 };
 
 // @desc    Get child by ID
-// @route   GET /api/v1/children/:id
+// @route   GET /children/:id
 // @access  Private (Parent/Specialist)
 const getChildById = async (req, res) => {
     const child = await Child.findById(req.params.id);
@@ -88,4 +92,41 @@ const getChildById = async (req, res) => {
     }
 };
 
-module.exports = { createChild, getMyChildren, getChildById };
+// @desc    Update child profile
+// @route   PUT /children/:id
+// @access  Private (Parent)
+const updateChild = async (req, res) => {
+    try {
+        const child = await Child.findById(req.params.id);
+
+        if (!child) {
+            res.status(404);
+            throw new Error('Child not found');
+        }
+
+        // Check ownership
+        if (child.parentId.toString() !== req.user._id.toString()) {
+            res.status(403);
+            throw new Error('Not authorized to update this child profile');
+        }
+
+        // Handle photo upload if any
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path);
+            req.body.photoUrl = result.secure_url;
+            fs.unlinkSync(req.file.path);
+        }
+
+        const updatedChild = await Child.findByIdAndUpdate(
+            req.params.id,
+            { $set: req.body },
+            { new: true, runValidators: true }
+        );
+
+        res.json(updatedChild);
+    } catch (error) {
+        res.status(500).json({ message: error.message || 'حدث خطأ أثناء تحديث ملف الطفل' });
+    }
+};
+
+module.exports = { createChild, getMyChildren, getChildById, updateChild };

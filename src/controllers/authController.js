@@ -2,10 +2,15 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 // @desc    Register a new user
-// @route   POST /api/v1/auth/register
+// @route   POST /auth/register
 // @access  Public
 const registerUser = async (req, res) => {
-    const { phone, password, role, fullName } = req.body;
+    let { phone, password, role, fullName } = req.body;
+    
+    // Trim whitespace to prevent validation mismatch
+    phone = phone?.trim();
+    password = password?.trim();
+    fullName = fullName?.trim();
 
     const userExists = await User.findOne({ phone });
 
@@ -36,10 +41,14 @@ const registerUser = async (req, res) => {
 };
 
 // @desc    Auth user & get token
-// @route   POST /api/v1/auth/login
+// @route   POST /auth/login
 // @access  Public
 const loginUser = async (req, res) => {
-    const { phone, password } = req.body;
+    let { phone, password } = req.body;
+    
+    // Trim whitespace to prevent validation mismatch
+    phone = phone?.trim();
+    password = password?.trim();
 
     const user = await User.findOne({ phone });
 
@@ -57,10 +66,23 @@ const loginUser = async (req, res) => {
     }
 };
 
+// @desc    Get user profile
+// @route   GET /auth/me
+// @access  Private
+const getMe = async (req, res) => {
+    const user = {
+        _id: req.user._id,
+        phone: req.user.phone,
+        role: req.user.role,
+        fullName: req.user.fullName,
+    };
+    res.json(user);
+};
+
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
     });
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, getMe };

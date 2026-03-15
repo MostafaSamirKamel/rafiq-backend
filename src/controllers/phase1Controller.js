@@ -4,7 +4,7 @@ const cloudinary = require('../config/cloudinary');
 const fs = require('fs');
 
 // @desc    Add a recognition item (person, place, object)
-// @route   POST /api/v1/phase1/items
+// @route   POST /phase1/items
 // @access  Private
 const addItem = async (req, res) => {
     const { childId, type, name, relation, category } = req.body;
@@ -37,7 +37,7 @@ const addItem = async (req, res) => {
 };
 
 // @desc    Get items for a child by type
-// @route   GET /api/v1/phase1/items/:childId?type=person
+// @route   GET /phase1/items/:childId?type=person
 // @access  Private
 const getItems = async (req, res) => {
     const { type } = req.query;
@@ -49,7 +49,7 @@ const getItems = async (req, res) => {
 };
 
 // @desc    Start Phase 1 training session
-// @route   POST /api/v1/phase1/start-session
+// @route   POST /phase1/start-session
 // @access  Private
 const startSession = async (req, res) => {
     const { childId } = req.body;
@@ -61,7 +61,7 @@ const startSession = async (req, res) => {
 };
 
 // @desc    Submit Phase 1 Quiz Result
-// @route   POST /api/v1/phase1/quiz
+// @route   POST /phase1/quiz
 // @access  Private
 const submitQuiz = async (req, res) => {
     const { sessionId, correct } = req.body;

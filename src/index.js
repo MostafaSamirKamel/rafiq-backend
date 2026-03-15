@@ -10,6 +10,8 @@ const { notFound, errorHandler } = require('./middlewares/errorMiddleware');
 connectDB();
 
 const app = express();
+module.exports = app;
+
 
 // Middlewares
 app.use(express.json());
@@ -32,13 +34,13 @@ app.get('/', (req, res) => {
     res.send('RAFIQ API is running...');
 });
 
-app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/children', childRoutes);
-app.use('/api/v1/phase1', phase1Routes);
-app.use('/api/v1/phase2', phase2Routes);
-app.use('/api/v1/phase3', phase3Routes);
-app.use('/api/v1/specialists', specialistRoutes);
-app.use('/api/v1/progress', progressRoutes);
+app.use('/auth', authRoutes);
+app.use('/children', childRoutes);
+app.use('/phase1', phase1Routes);
+app.use('/phase2', phase2Routes);
+app.use('/phase3', phase3Routes);
+app.use('/specialists', specialistRoutes);
+app.use('/progress', progressRoutes);
 
 // Auth and other routes will be added here
 
@@ -46,8 +48,10 @@ app.use('/api/v1/progress', progressRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+    });
+}
 
-app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
-});
