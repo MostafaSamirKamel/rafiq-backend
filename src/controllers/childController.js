@@ -22,11 +22,22 @@ const createChild = async (req, res) => {
 
         let photoUrl = '';
         if (req.file) {
-            const result = await cloudinary.uploader.upload(req.file.path);
+            const uploadToCloudinary = (buffer) => {
+                return new Promise((resolve, reject) => {
+                    const uploadStream = cloudinary.uploader.upload_stream(
+                        { folder: 'children' },
+                        (error, result) => {
+                            if (error) return reject(error);
+                            resolve(result);
+                        }
+                    );
+                    uploadStream.end(buffer);
+                });
+            };
+            const result = await uploadToCloudinary(req.file.buffer);
             photoUrl = result.secure_url;
-            // Delete local file
-            fs.unlinkSync(req.file.path);
         }
+
 
         let specialistId = null;
         if (specialistPhone) {
@@ -112,10 +123,22 @@ const updateChild = async (req, res) => {
 
         // Handle photo upload if any
         if (req.file) {
-            const result = await cloudinary.uploader.upload(req.file.path);
+            const uploadToCloudinary = (buffer) => {
+                return new Promise((resolve, reject) => {
+                    const uploadStream = cloudinary.uploader.upload_stream(
+                        { folder: 'children' },
+                        (error, result) => {
+                            if (error) return reject(error);
+                            resolve(result);
+                        }
+                    );
+                    uploadStream.end(buffer);
+                });
+            };
+            const result = await uploadToCloudinary(req.file.buffer);
             req.body.photoUrl = result.secure_url;
-            fs.unlinkSync(req.file.path);
         }
+
 
         const updatedChild = await Child.findByIdAndUpdate(
             req.params.id,

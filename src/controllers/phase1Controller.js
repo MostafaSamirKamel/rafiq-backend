@@ -11,10 +11,22 @@ const addItem = async (req, res) => {
 
     let photoUrl = '';
     if (req.file) {
-        const result = await cloudinary.uploader.upload(req.file.path);
+        const uploadToCloudinary = (buffer) => {
+            return new Promise((resolve, reject) => {
+                const uploadStream = cloudinary.uploader.upload_stream(
+                    { folder: 'recognition' },
+                    (error, result) => {
+                        if (error) return reject(error);
+                        resolve(result);
+                    }
+                );
+                uploadStream.end(buffer);
+            });
+        };
+        const result = await uploadToCloudinary(req.file.buffer);
         photoUrl = result.secure_url;
-        fs.unlinkSync(req.file.path);
-    } else if (type === 'place') {
+    }
+ else if (type === 'place') {
         // Default placeholder for places if no image provided
         photoUrl = 'https://res.cloudinary.com/dkt7y7lzm/image/upload/v1/defaults/place-placeholder.png';
         // In a real scenario, I might generate a default image or use a fixed one
