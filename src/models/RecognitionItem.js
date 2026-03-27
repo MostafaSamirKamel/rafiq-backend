@@ -28,6 +28,12 @@ const recognitionItemSchema = new mongoose.Schema({
     audioUrl: {
         type: String,
     },
+    videoUrl: {
+        type: String,
+    },
+    videoPrompt: {
+        type: String,
+    },
     isDefault: {
         type: Boolean,
         default: false,

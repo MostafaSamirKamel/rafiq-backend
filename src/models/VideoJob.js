@@ -20,8 +20,12 @@ const videoJobSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['gesture', 'emotion'],
+        enum: ['gesture', 'emotion', 'recognition'],
         required: true,
+    },
+    recognitionItemId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'RecognitionItem',
     },
     target: {
         type: String, // e.g., 'hello', 'happy'

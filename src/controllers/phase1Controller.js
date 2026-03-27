@@ -95,4 +95,20 @@ const submitQuiz = async (req, res) => {
     });
 };
 
-module.exports = { addItem, getItems, startSession, submitQuiz };
+// @desc    Delete a recognition item
+// @route   DELETE /phase1/items/:id
+// @access  Private
+const deleteItem = async (req, res) => {
+    const item = await RecognitionItem.findById(req.params.id);
+
+    if (!item) {
+        res.status(404);
+        throw new Error('Item not found');
+    }
+
+    await item.deleteOne();
+    res.json({ message: 'Item removed' });
+};
+
+module.exports = { addItem, getItems, startSession, submitQuiz, deleteItem };
+
